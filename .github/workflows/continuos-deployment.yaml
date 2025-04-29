@@ -27,14 +27,14 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: domeneghetti/devops-ci:latest
+          tags: augustosantos17/frontend-devops:latest
 
       - name: Azure WebApp
         uses: Azure/webapps-deploy@v3.0.1
         with:
-          app-name: domeneghetti-devops-ci
+          app-name: devclass-frontend-devops
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-          image: domeneghetti/devops-ci:latest
+          image: augustosantos17/frontend-devops
   
   e2e-testing:
     name: e2e-testing
