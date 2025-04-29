@@ -1,20 +1,27 @@
 name: integration
-
+run-name: Pipeline de CI
 on:
-  # push:
-  #   branches:
-  #     - main
-  workflow_dispatch:
+  push:
+    branches:
+      - dev
+  # workflow_dispatch:
 jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  
+          fetch-depth: 0
+
       - uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=devops-turma-b
+            -Dsonar.projectName=devops-turma-b
+            -Dsonar.projectVersion=1.0.0
+            -Dsonar.sources=.
