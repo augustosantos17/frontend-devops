@@ -66,3 +66,29 @@ jobs:
         run: |
           cd integration-test
           npx cypress run
+
+  e2e-testing:
+    name: e2e-testing
+    runs-on: ubuntu-latest
+    needs: deploy
+
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@3.9.1
+        width:
+          node-version: '20'
+
+      - name: Install Packages
+        run: |
+          cd integration-test
+          npm i
+
+      - name: Run E2E Cypress
+        run: 
+          cd integration-test
+          npx cypress run  
